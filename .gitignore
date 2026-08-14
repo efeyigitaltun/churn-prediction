@@ -1,1 +1,4 @@
 venv/
+models/*.joblib
+notebooks/*.html
+__pycache__/
