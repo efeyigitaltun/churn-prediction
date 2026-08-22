@@ -1,4 +1,6 @@
 [theme]
+base = "light"
+
 # Ana vurgu rengi (Butonlar, progress barlar, aktif sekmeler için kurumsal mavi)
 primaryColor = "#005b96"
 
