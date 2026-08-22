@@ -1,0 +1,15 @@
+[theme]
+# Ana vurgu rengi (Butonlar, progress barlar, aktif sekmeler için kurumsal mavi)
+primaryColor = "#005b96"
+
+# Arka plan rengi (Göz yormayan, çok hafif gri/beyaz)
+backgroundColor = "#f8f9fa"
+
+# İkincil arka plan (Sol menü ve bilgi kartları için biraz daha koyu gri)
+secondaryBackgroundColor = "#e9ecef"
+
+# Metin rengi (Koyu antrasit, tam siyah değil)
+textColor = "#212529"
+
+# Yazı Tipi (Modern ve temiz görünen sans-serif)
+font = "sans serif"
