@@ -1,9 +1,23 @@
+# --- Veri Bilimi ve Makine Öğrenmesi ---
 pandas
 numpy
 scikit-learn
+imbalanced-learn
+joblib
 matplotlib
 seaborn
+
+# --- Araçlar ve Raporlama ---
 jupyter
 ydata-profiling
 mlflow
 dvc
+
+# --- Backend (API) ---
+fastapi
+uvicorn
+
+# --- Frontend (Arayüz) ---
+streamlit>=1.32
+requests>=2.31
+plotly>=5.20
