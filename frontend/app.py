@@ -13,7 +13,7 @@ except ImportError:
 # ============================================================
 # AYARLAR
 # ============================================================
-DEFAULT_API_URL = "http://127.0.0.1:8000/predict"
+DEFAULT_API_URL = "https://churn-prediction-api-vbld.onrender.com/predict"
 REQUEST_TIMEOUT = 10
 
 st.set_page_config(
