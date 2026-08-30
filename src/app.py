@@ -91,7 +91,7 @@ def home():
     return {"message": "Telco Churn Prediction API aktif ve çalışıyor! 🚀"}
 
 @app.post("/predict")
-@limiter.limit("5/minute")
+@limiter.limit("30/minute")
 def predict_churn(request: Request, customer: CustomerFeatures):
     # Gelen veriyi Pandas DataFrame'e çeviriyoruz
     # Pydantic V2 güncellemesi için dict() yerine model_dump() kullanıldı
