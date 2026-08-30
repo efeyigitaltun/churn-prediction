@@ -8,7 +8,7 @@ import os
 app = FastAPI(
     title="Telco Churn Prediction API",
     description="Müşteri terk riskini tahmin eden ve What-If simülasyonu sunan yapay zeka servisi",
-    version="1.0"
+    version="1.0.0"
 )
 
 # Modelin dosya yolunu belirleyip dışa aktardığımız joblib dosyasını yüklüyoruz
@@ -37,6 +37,34 @@ class CustomerFeatures(BaseModel):
     PaymentMethod: str
     MonthlyCharges: float
     TotalCharges: float
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "gender": "Female",
+                    "SeniorCitizen": 0,
+                    "Partner": "Yes",
+                    "Dependents": "No",
+                    "tenure": 1,
+                    "PhoneService": "Yes",
+                    "MultipleLines": "No",
+                    "InternetService": "Fiber optic",
+                    "OnlineSecurity": "No",
+                    "OnlineBackup": "No",
+                    "DeviceProtection": "No",
+                    "TechSupport": "No",
+                    "StreamingTV": "No",
+                    "StreamingMovies": "No",
+                    "Contract": "Month-to-month",
+                    "PaperlessBilling": "Yes",
+                    "PaymentMethod": "Electronic check",
+                    "MonthlyCharges": 70.70,
+                    "TotalCharges": 70.70
+                }
+            ]
+        }
+    }
 
 @app.get("/")
 def home():
