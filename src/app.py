@@ -3,11 +3,21 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 import os
+import logging
 
 # --- Güvenlik (Rate Limiting) Paketleri ---
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+
+# Loglama Yapılandırması (Dosyaya Yazdırma)
+logging.basicConfig(
+    filename="api_requests.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(client_ip)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger(__name__)
 
 # FastAPI uygulamasını başlatıyoruz
 app = FastAPI(
@@ -83,18 +93,25 @@ def home():
 @app.post("/predict")
 @limiter.limit("5/minute")
 def predict_churn(request: Request, customer: CustomerFeatures):
-    # Gelen veriyi Pandas DataFrame'e çeviriyoruz (Modelimiz DataFrame bekliyor)
-    input_data = pd.DataFrame([customer.dict()])
+    # Gelen veriyi Pandas DataFrame'e çeviriyoruz
+    # Pydantic V2 güncellemesi için dict() yerine model_dump() kullanıldı
+    input_data = pd.DataFrame([customer.model_dump()])
     
-    # Model ile tahmin yapma (Olasılıkları alıyoruz)
-    probability = model.predict_proba(input_data)[0][1]
+    # Model ile tahmin yapma
+    probability = float(model.predict_proba(input_data)[0][1])
     prediction = int(model.predict(input_data)[0])
     
     # Risk durumuna göre karar üretme
     risk_status = "Yüksek Riskli (Terk Edebilir)" if prediction == 1 else "Sadık Müşteri"
+    churn_probability_percentage = round(probability * 100, 2)
+    
+    # --- LOGLAMA İŞLEMİ ---
+    client_ip = request.client.host if request.client else "Bilinmeyen IP"
+    log_message = f"Risk Analizi İstegi - Sonuc: {risk_status} - Olasilik: %{churn_probability_percentage}"
+    logger.info(log_message, extra={"client_ip": client_ip})
     
     return {
         "churn_prediction": prediction,
         "risk_status": risk_status,
-        "churn_probability": round(float(probability) * 100, 2)
+        "churn_probability": churn_probability_percentage
     }
