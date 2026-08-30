@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+.git/
+.github/
+.pytest_cache/
+api_requests.log
+frontend/
