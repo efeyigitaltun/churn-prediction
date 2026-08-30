@@ -4,4 +4,3 @@ __pycache__/
 .github/
 .pytest_cache/
 api_requests.log
-frontend/
