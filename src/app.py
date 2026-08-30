@@ -14,7 +14,7 @@ from slowapi.errors import RateLimitExceeded
 logging.basicConfig(
     filename="api_requests.log",
     level=logging.INFO,
-    format="%(asctime)s - %(client_ip)s - %(message)s",
+    format="%(asctime)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S"
 )
 logger = logging.getLogger(__name__)
@@ -107,8 +107,11 @@ def predict_churn(request: Request, customer: CustomerFeatures):
     
     # --- LOGLAMA İŞLEMİ ---
     client_ip = request.client.host if request.client else "Bilinmeyen IP"
-    log_message = f"Risk Analizi İstegi - Sonuc: {risk_status} - Olasilik: %{churn_probability_percentage}"
-    logger.info(log_message, extra={"client_ip": client_ip})
+    
+    # IP'yi ekstra bir parametre yerine doğrudan mesajın içine ekliyoruz
+    log_message = f"IP: {client_ip} | Risk Analizi Istegi - Sonuc: {risk_status} - Olasilik: %{churn_probability_percentage}"
+    
+    logger.info(log_message)
     
     return {
         "churn_prediction": prediction,
