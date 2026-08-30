@@ -8,6 +8,7 @@ joblib
 # --- Backend (API) İçin Gerekenler ---
 fastapi
 uvicorn
+slowapi
 
 # --- Frontend (Osman'ın Arayüzü) İçin Gerekenler ---
 streamlit>=1.32

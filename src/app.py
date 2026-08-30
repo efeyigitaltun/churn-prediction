@@ -1,8 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 import joblib
 import pandas as pd
 import os
+
+# --- Güvenlik (Rate Limiting) Paketleri ---
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 # FastAPI uygulamasını başlatıyoruz
 app = FastAPI(
@@ -10,6 +15,11 @@ app = FastAPI(
     description="Müşteri terk riskini tahmin eden ve What-If simülasyonu sunan yapay zeka servisi",
     version="1.0.0"
 )
+# IP adresine göre hız sınırlandırıcıyı tanımla
+limiter = Limiter(key_func=get_remote_address)
+# Limiter'ı uygulamaya entegre et
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Modelin dosya yolunu belirleyip dışa aktardığımız joblib dosyasını yüklüyoruz
 # Not: app.py src içinde çalışacağı için model bir üst klasördeki models klasöründedir.
@@ -71,7 +81,8 @@ def home():
     return {"message": "Telco Churn Prediction API aktif ve çalışıyor! 🚀"}
 
 @app.post("/predict")
-def predict_churn(customer: CustomerFeatures):
+@limiter.limit("5/minute")
+def predict_churn(request: Request, customer: CustomerFeatures):
     # Gelen veriyi Pandas DataFrame'e çeviriyoruz (Modelimiz DataFrame bekliyor)
     input_data = pd.DataFrame([customer.dict()])
     
