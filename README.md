@@ -52,7 +52,7 @@ Müşteri verilerini analiz ederek churn riskini önceden tespit eden, karar des
 | 🐳 **Platform Bağımsızlık** | Docker & Docker Compose sayesinde işletim sisteminden bağımsız, saniyeler içinde ayağa kalkar |
 
 ## 🏗️ Sistem Mimarisi
-{
+
 ```mermaid
 flowchart TD
     User(("👤 Kullanıcı"))
@@ -78,10 +78,9 @@ flowchart TD
 
     User --> Frontend
     Frontend -->|HTTP / JSON| Backend
-    DevOps -.-|Sistemi Orkestre Eder| Frontend
-    DevOps -.-|Sistemi Orkestre Eder| Backend
-}
-
+    DevOps -.->|Sistemi Orkestre Eder| Frontend
+    DevOps -.->|Sistemi Orkestre Eder| Backend
+```
 
 ## 🛠️ Teknoloji Yığını (Tech Stack)
 
@@ -161,6 +160,7 @@ docker-compose up --build
 
 ## 📂 Proje Yapısı
 
+```
 churn-prediction-project/
 │
 ├── 📁 src/                          # FastAPI servisi (Backend)
@@ -180,7 +180,7 @@ churn-prediction-project/
 ├── 🐳 docker-compose.yml            # Servis orkestrasyonu ve ağ yapılandırması
 ├── 📄 requirements.txt              # Proje bağımlılıkları
 └── 📘 README.md
-
+```
 
 ## 👥 Geliştirici Ekibi
 
@@ -205,6 +205,6 @@ churn-prediction-project/
 
 <div align="center">
 
-
+⭐️ Projeyi beğendiyseniz bir yıldız bırakmayı unutmayın!
 
 </div>
