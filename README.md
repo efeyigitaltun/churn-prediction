@@ -52,7 +52,7 @@ Müşteri verilerini analiz ederek churn riskini önceden tespit eden, karar des
 | 🐳 **Platform Bağımsızlık** | Docker & Docker Compose sayesinde işletim sisteminden bağımsız, saniyeler içinde ayağa kalkar |
 
 ## 🏗️ Sistem Mimarisi
-
+{
 ```mermaid
 flowchart TD
     User(("👤 Kullanıcı"))
@@ -80,7 +80,7 @@ flowchart TD
     Frontend -->|HTTP / JSON| Backend
     DevOps -.-|Sistemi Orkestre Eder| Frontend
     DevOps -.-|Sistemi Orkestre Eder| Backend
-
+}
 
 
 ## 🛠️ Teknoloji Yığını (Tech Stack)
