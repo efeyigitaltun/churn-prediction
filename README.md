@@ -135,7 +135,7 @@ Projeyi kendi bilgisayarınızda çalıştırmak için sisteminizde yalnızca **
 
 ```bash
 git clone https://github.com/efeyigitaltun/churn-prediction.git
-cd churn-prediction-project
+cd churn-prediction
 ```
 
 ### 2️⃣ Sistemi Ayağa Kaldırın
