@@ -134,7 +134,7 @@ Projeyi kendi bilgisayarınızda çalıştırmak için sisteminizde yalnızca **
 ### 1️⃣ Repoyu Klonlayın
 
 ```bash
-git clone https://github.com/KULLANICI_ADIN/churn-prediction-project.git
+git clone https://github.com/efeyigitaltun/churn-prediction.git
 cd churn-prediction-project
 ```
 
